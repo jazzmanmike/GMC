@@ -1,0 +1,138 @@
+<html>
+<head>
+    <script src="https://cdn.anychart.com/releases/8.7.1/js/anychart-core.min.js"></script>
+    <script src="https://cdn.anychart.com/releases/8.7.1/js/anychart-radar.min.js"></script>
+    <style type="text/css">
+        html, body, #container {
+            width: 100%;
+            height: 100%;
+            margin: 0;
+            padding: 0;
+        }
+    </style>
+</head>
+<body>
+<div id="container"></div>
+</body>
+<script>
+    anychart.onDocumentReady(function () {
+        // GMC survey data (parsed)
+
+        var CUH = [
+            {x:"Overall Satisfaction",value: 53},
+            {x:"Clinical Supervision",value: 72},
+            {x:"Clinical Supervision out of hours",value: 77},
+            {x:"Reporting systems",value: 6},
+            {x:"Work Load",value: 34},
+            {x:"Teamwork",value: 59},
+            {x:"Handover",value: 42},
+            {x:"Supportive environment",value: 53},
+            {x:"Induction",value: 64},
+            {x:"Adequate Experience",value: 73},
+            {x:"Curriculum Coverage",value: 66},
+            {x:"Educational Governance",value: 65},
+            {x:"Educational Supervision",value: 73},
+            {x:"Feedback",value: 53},
+            {x:"Local Teaching",value: 68},
+            {x:"Regional Teaching",value: 42},
+            {x:"Study Leave",value: 53},
+            {x:"Rota Design",value: 33},
+        ];
+
+        var max = [
+            {x:"Overall Satisfaction",value: 96},
+            {x:"Clinical Supervision",value: 98},
+            {x:"Clinical Supervision out of hours",value: 1},
+            {x:"Reporting systems",value: 94},
+            {x:"Work Load",value: 54},
+            {x:"Teamwork",value: 94},
+            {x:"Handover",value: 85},
+            {x:"Supportive environment",value: 9},
+            {x:"Induction",value: 9},
+            {x:"Adequate Experience",value: 94},
+            {x:"Curriculum Coverage",value: 95},
+            {x:"Educational Governance",value: 88},
+            {x:"Educational Supervision",value: 96},
+            {x:"Feedback",value: 93},
+            {x:"Local Teaching",value: 85},
+            {x:"Regional Teaching",value: 88},
+            {x:"Study Leave",value: 88},
+            {x:"Rota Design",value: 79},
+        ];
+
+        var min = [
+            {x:"Overall Satisfaction",value: 53},
+            {x:"Clinical Supervision",value: 72},
+            {x:"Clinical Supervision out of hours",value: 0},
+            {x:"Reporting systems",value: 51},
+            {x:"Work Load",value: 18},
+            {x:"Teamwork",value: 54},
+            {x:"Handover",value: 0},
+            {x:"Supportive environment",value: 51},
+            {x:"Induction",value: 58},
+            {x:"Adequate Experience",value: 6},
+            {x:"Curriculum Coverage",value: 58},
+            {x:"Educational Governance",value: 54},
+            {x:"Educational Supervision",value: 69},
+            {x:"Feedback",value: 45},
+            {x:"Local Teaching",value: 0},
+            {x:"Regional Teaching",value: 0},
+            {x:"Study Leave",value: 0},
+            {x:"Rota Design",value: 33},
+        ];
+
+        var avg = [
+            {x:"Overall Satisfaction",value: 76},
+            {x:"Clinical Supervision",value: 92},
+            {x:"Clinical Supervision out of hours",value: 85},
+            {x:"Reporting systems",value: 74},
+            {x:"Work Load",value: 40},
+            {x:"Teamwork",value: 74},
+            {x:"Handover",value: 63},
+            {x:"Supportive environment",value: 69},
+            {x:"Induction",value: 76},
+            {x:"Adequate Experience",value: 78},
+            {x:"Curriculum Coverage",value: 75},
+            {x:"Educational Governance",value: 71},
+            {x:"Educational Supervision",value: 85},
+            {x:"Feedback",value: 77},
+            {x:"Local Teaching",value: 61},
+            {x:"Regional Teaching",value: 59},
+            {x:"Study Leave",value: 60},
+            {x:"Rota Design",value: 55},
+        ];
+
+        // create radar chart
+        var chart = anychart.radar();
+
+        // set chart yScale settings
+        chart.yScale()
+            .minimum(0)
+            .maximum(100)
+            .ticks({'interval':10});
+
+        // color alternating cells
+        chart.yGrid().palette(["gray 0.1", "gray 0.2"]);
+
+        // department
+        chart.area(CUH).name('CUH').markers(true).fill("#f6eff7", 0.3).stroke("#f6eff7")
+        // maximum
+        chart.area(max).name('max').markers(true).fill("#02818a", 0.3).stroke("#02818a")
+        // minimum
+        chart.area(min).name('min').markers(true).fill("#bdc9e1", 0.3).stroke("#bdc9e1")
+        // average
+        chart.area(avg).name('avg').markers(true).fill("#67a9cf", 0.3).stroke("#67a9cf")
+
+        // set chart title
+        chart.title("GMC Survey: Neurosurgery")
+        // set legend
+            .legend(true);
+
+        // set container id for the chart
+        chart.container('container');
+        // initiate chart drawing
+        chart.draw();
+
+    });
+</script>
+</html>
